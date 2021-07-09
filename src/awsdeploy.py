@@ -20,8 +20,12 @@ def main(vpcid,region,name,keypair):
     except Exception as e: print(e)
 
     try:
-      vpc = ec2Res.Vpc(vpcid)
+      Vpc = ec2Res.Vpc(vpcid)
     except Exception as e: print("VPC not found: ", e)
+
+    try:
+       keyPair = ec2Res.KeyPair(keypair)
+    except Exception as e: print("Keypair not found: ", e)
 
    # quick check to see what is there
 
