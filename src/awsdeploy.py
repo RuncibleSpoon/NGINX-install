@@ -25,7 +25,14 @@ def main(vpcid,region,name):
 
 
 
-    response = ec2.describe_instances()
+    response = ec2.describe_instances(
+      Filters=[
+        {
+         'Name': 'vpc-id',
+         'Values': [vpcid]
+        }
+      ]
+    )
     print(response)
 
 
