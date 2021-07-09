@@ -2,7 +2,10 @@
 #
 import boto3
 
-ec2 = boto3.client('ec2')
+try:
+  ec2 = boto3.client('ec2')
+
+except Exception as e: print(e)
 
 #This function will describe all the instances
 #with their current state
