@@ -71,11 +71,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('vpcid', help='Your AWS VPC')
+    parser.add_argument('vpcid', help='Your AWS VPC - must exist')
     parser.add_argument(
         '--region',
         default='us-east-2',
-        help='AWS Region to deploy to.')
+        help='AWS Region to deploy to - choose us-east-2 or us-west-2.',
+        choices=['us-east-2', 'us-west-2'])
     parser.add_argument(
         '--name', default='demo-instance', help='New instance name.')
     parser.add_argument(
