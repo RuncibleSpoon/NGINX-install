@@ -42,7 +42,7 @@ def main(vpcid,region,name,keypair):
       Vpc = ec2Res.Vpc(vpcid)
       Vpc.load()
     except Exception as e:
-      print("VPC not found in ", region, " : ", e)
+      print("VPC ", vpcid , " not found in ", region, " : ", e)
       sys.exit(1)
     try:
        keyPair = ec2Res.KeyPair(keypair)
