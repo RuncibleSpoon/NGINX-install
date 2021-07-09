@@ -5,16 +5,31 @@ import argparse
 import os
 import time
 import sys
-
+from botocore.config import Config
 
 
 def main(vpcid,region,name,keypair):
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
 
+
+
+    my_config = Config(
+        region_name = region,
+        signature_version = 'v4',
+        retries = {
+            'max_attempts': 10,
+            'mode': 'standard'
+        }
+    )
+
+
+
   # basic setup check
 
+
+
     try:
-      ec2 = boto3.client('ec2')
+      ec2 = boto3.client('ec2',config=my_config)
     except Exception as e:
       print("Unable to create ec2 client: ",e)
       sys.exit(1)
