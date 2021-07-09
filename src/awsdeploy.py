@@ -12,7 +12,7 @@ def main(vpcid,region,name):
 
     try:
       ec2 = boto3.client('ec2')
-      except Exception as e: print(e)
+    except Exception as e: print(e)
 
 #     try:
 #       ec2Res = boto3.resource('ec2')
