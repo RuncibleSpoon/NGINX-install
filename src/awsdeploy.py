@@ -34,7 +34,7 @@ def main(vpcid,region,name,keypair):
       print("Unable to create ec2 client: ",e)
       sys.exit(1)
     try:
-      ec2Res = boto3.resource('ec2')
+      ec2Res = boto3.resource('ec2',config=my_config)
     except Exception as e:
       print("Unable to create ec2 resource:", e)
       sys.exit(1)
