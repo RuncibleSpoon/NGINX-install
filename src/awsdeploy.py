@@ -25,6 +25,7 @@ def main(vpcid,region,name,keypair):
       sys.exit(1)
     try:
       Vpc = ec2Res.Vpc(vpcid)
+      Vpc.load()
     except Exception as e:
       print("VPC not found: ", e)
       sys.exit(1)
