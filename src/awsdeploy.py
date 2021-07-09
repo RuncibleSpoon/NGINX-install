@@ -13,6 +13,7 @@ def main(vpcid,region,name):
 
     except Exception as e: print(e)
 
+    print("vpc:", vpcid, " Region: ", region, " name: ", name)
     response = ec2.describe_instances()
     print(response)
 
