@@ -76,10 +76,10 @@ def main(vpcid,region,name,keypair):
     )
     print(response)
 
-   ### create the security groups
-   SecurityGroup=setup_security_group(group_name, group_description, vpcid)
+      ### create the security groups
+    SecurityGroup=setup_security_group(group_name, group_description, vpcid)
 
-   print(SecurityGroup)
+    print(SecurityGroup)
 
 ### Stole this bit from
 ### https://docs.aws.amazon.com/code-samples/latest/catalog/python-ec2-ec2_basics-ec2_setup.py.html
