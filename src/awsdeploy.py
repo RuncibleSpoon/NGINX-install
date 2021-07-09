@@ -12,6 +12,10 @@ from botocore.config import Config
 
 image = {'us-west-2': 'ami-01773ce53581acf22', 'us-east-2': 'ami-0b29b6e62f2343b46' }
 
+# other default things that could be changed
+
+
+
 def main(vpcid,region,name,keypair):
     ami=image[region]
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair, " AMI to use: ", ami)
@@ -70,7 +74,64 @@ def main(vpcid,region,name,keypair):
     )
     print(response)
 
+### Stole this bit from
+### https://docs.aws.amazon.com/code-samples/latest/catalog/python-ec2-ec2_basics-ec2_setup.py.html
 
+def setup_security_group(group_name, group_description, ssh_ingress_ip=None):
+    """
+    Creates a security group in the default virtual private cloud (VPC) of the
+    current account, then adds rules to the security group to allow access to
+    HTTP, HTTPS and, optionally, SSH.
+
+    :param group_name: The name of the security group to create.
+    :param group_description: The description of the security group to create.
+    :param ssh_ingress_ip: The IP address that is granted inbound access to connect
+                           to port 22 over TCP, used for SSH.
+    :return: The newly created security group.
+    """
+    try:
+        default_vpc = list(ec2.vpcs.filter(
+            Filters=[{'Name': 'isDefault', 'Values': ['true']}]))[0]
+        logger.info("Got default VPC %s.", default_vpc.id)
+    except ClientError:
+        logger.exception("Couldn't get VPCs.")
+        raise
+    except IndexError:
+        logger.exception("No default VPC in the list.")
+        raise
+
+    try:
+        security_group = default_vpc.create_security_group(
+            GroupName=group_name, Description=group_description)
+        logger.info(
+            "Created security group %s in VPC %s.", group_name, default_vpc.id)
+    except ClientError:
+        logger.exception("Couldn't create security group %s.", group_name)
+        raise
+
+    try:
+        ip_permissions = [{
+            # HTTP ingress open to anyone
+            'IpProtocol': 'tcp', 'FromPort': 80, 'ToPort': 80,
+            'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
+        }, {
+            # HTTPS ingress open to anyone
+            'IpProtocol': 'tcp', 'FromPort': 443, 'ToPort': 443,
+            'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
+        }]
+        if ssh_ingress_ip is not None:
+            ip_permissions.append({
+                # SSH ingress open to only the specified IP address
+                'IpProtocol': 'tcp', 'FromPort': 22, 'ToPort': 22,
+                'IpRanges': [{'CidrIp': f'{ssh_ingress_ip}/32'}]})
+        security_group.authorize_ingress(IpPermissions=ip_permissions)
+        logger.info("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
+                    "but only %s for SSH.", security_group.id, ssh_ingress_ip)
+    except ClientError:
+        logger.exception("Couldnt authorize inbound rules for %s.", group_name)
+        raise
+    else:
+        return security_group
 
 
 if __name__ == '__main__':
