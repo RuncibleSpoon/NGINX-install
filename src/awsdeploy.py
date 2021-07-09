@@ -77,7 +77,7 @@ def main(vpcid,region,name,keypair):
     print(response)
 
       ### create the security groups
-    SecurityGroup=setup_security_group(group_name, group_description, vpcid)
+    SecurityGroup=setup_security_group(security_group_name, security_group_description, vpcid)
 
     print(SecurityGroup)
 
