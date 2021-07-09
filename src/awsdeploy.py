@@ -8,12 +8,18 @@ import time
 
 
 def main(vpcid,region,name):
+    print("vpc:", vpcid, " Region: ", region, " name: ", name)
+
     try:
       ec2 = boto3.client('ec2')
-
     except Exception as e: print(e)
 
-    print("vpc:", vpcid, " Region: ", region, " name: ", name)
+    try:
+      vpc=ec2.Vpc(vpcid)
+    except Exception as e: print("VPC not found: ", e)
+
+
+
     response = ec2.describe_instances()
     print(response)
 
