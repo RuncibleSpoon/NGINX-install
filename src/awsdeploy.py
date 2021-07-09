@@ -21,7 +21,7 @@ def main(vpcid,region,name,keypair):
     try:
       ec2Res = boto3.resource('ec2')
     except Exception as e:
-      print("Unable to create ec2 resource:" e)
+      print("Unable to create ec2 resource:", e)
       sys.exit(1)
     try:
       Vpc = ec2Res.Vpc(vpcid)
