@@ -11,19 +11,23 @@ import sys
 def main(vpcid,region,name,keypair):
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
 
+  # basic setup check
+
     try:
       ec2 = boto3.client('ec2')
-    except Exception as e: print(e)
-
+    except Exception as e:
+      print("Unable to create ec2 client: ",e)
+      sys.exit(1)
     try:
       ec2Res = boto3.resource('ec2')
-
-    except Exception as e: print(e)
-
+    except Exception as e:
+      print("Unable to create ec2 resource:" e)
+      sys.exit(1)
     try:
       Vpc = ec2Res.Vpc(vpcid)
-    except Exception as e: print("VPC not found: ", e)
-
+    except Exception as e:
+      print("VPC not found: ", e)
+      sys.exit(1)
     try:
        keyPair = ec2Res.KeyPair(keypair)
        print(" Keypair id is ", keyPair.key_pair_id)
