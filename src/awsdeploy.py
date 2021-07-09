@@ -14,7 +14,7 @@ image = {'us-west-2': 'ami-01773ce53581acf22', 'us-east-2': 'ami-0b29b6e62f2343b
 
 def main(vpcid,region,name,keypair):
     ami=image[region]
-    print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair, " AMI to use: " ami)
+    print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair, " AMI to use: ", ami)
 
 
 
