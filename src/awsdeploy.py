@@ -13,14 +13,8 @@ def main(vpcid,region,name):
 
     except Exception as e: print(e)
 
-
-
-
-
-
-
-response = ec2.describe_instances()
-print(response)
+    response = ec2.describe_instances()
+    print(response)
 
 
 if __name__ == '__main__':
