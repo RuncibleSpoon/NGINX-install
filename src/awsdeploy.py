@@ -4,6 +4,7 @@ import boto3
 import argparse
 import os
 import time
+import sys
 
 
 
@@ -26,7 +27,9 @@ def main(vpcid,region,name,keypair):
     try:
        keyPair = ec2Res.KeyPair(keypair)
        print(" Keypair id is ", keyPair.key_pair_id)
-    except Exception as e: print("Keypair not found: ", e)
+    except Exception as e:
+      print("Keypair not found: ", e)
+      sys.exit(1)
 
    # quick check to see what is there
 
