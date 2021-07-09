@@ -74,7 +74,7 @@ if __name__ == '__main__':
     parser.add_argument('vpcid', help='Your AWS VPC')
     parser.add_argument(
         '--region',
-        default='us-east-1',
+        default='us-east-2',
         help='AWS Region to deploy to.')
     parser.add_argument(
         '--name', default='demo-instance', help='New instance name.')
