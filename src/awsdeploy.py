@@ -54,4 +54,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    main(args.vpcid, args.region, args.name, arks.keypair)
+    main(args.vpcid, args.region, args.name, args.keypair)
