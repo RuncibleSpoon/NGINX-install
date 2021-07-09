@@ -1,7 +1,7 @@
 #Python for creating an ec2 instance and installing NGINX
 #
 import boto3
-import argpass
+import argparse
 import os
 import time
 
