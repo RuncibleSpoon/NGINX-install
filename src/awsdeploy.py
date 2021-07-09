@@ -7,8 +7,8 @@ import time
 
 
 
-def main(vpcid,region,name):
-    print("vpc:", vpcid, " Region: ", region, " name: ", name)
+def main(vpcid,region,name,keypair):
+    print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
 
     try:
       ec2 = boto3.client('ec2')
@@ -23,7 +23,7 @@ def main(vpcid,region,name):
       vpc = ec2Res.Vpc(vpcid)
     except Exception as e: print("VPC not found: ", e)
 
-
+   # quick check to see what is there
 
     response = ec2.describe_instances(
       Filters=[
@@ -34,6 +34,8 @@ def main(vpcid,region,name):
       ]
     )
     print(response)
+
+
 
 
 if __name__ == '__main__':
@@ -47,7 +49,9 @@ if __name__ == '__main__':
         help='AWS Region to deploy to.')
     parser.add_argument(
         '--name', default='demo-instance', help='New instance name.')
+    parser.add_argument(
+            '--keypair', help='aws keypair name to use')
 
     args = parser.parse_args()
 
-    main(args.vpcid, args.region, args.name)
+    main(args.vpcid, args.region, args.name, arks.keypair)
