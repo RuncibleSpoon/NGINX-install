@@ -25,7 +25,7 @@ def main(vpcid,region,name,keypair):
 
     try:
        keyPair = ec2Res.KeyPair(keypair)
-       print(" Keypair id is ", keyPair.key_name)
+       print(" Keypair id is ", keyPair.key_pair_id)
     except Exception as e: print("Keypair not found: ", e)
 
    # quick check to see what is there
