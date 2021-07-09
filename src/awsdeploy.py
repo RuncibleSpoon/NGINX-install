@@ -18,9 +18,9 @@ def main(vpcid,region,name):
       ec2Res = boto3.resource('ec2')
     except Exception as e: print(e)
 
-     try:
-       vpc = ec2res.Vpc(vpcid)
-     except Exception as e: print("VPC not found: ", e)
+    try:
+      vpc = ec2res.Vpc(vpcid)
+    except Exception as e: print("VPC not found: ", e)
 
 
 
