@@ -20,7 +20,7 @@ def main(vpcid,region,name):
 
     try:
       vpc = ec2res.Vpc(vpcid)
-    except Exception as e: print("VPC not found: ", e)
+      except Exception as e: print("VPC not found: ", e)
 
 
 
