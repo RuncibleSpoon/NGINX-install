@@ -14,6 +14,8 @@ image = {'us-west-2': 'ami-01773ce53581acf22', 'us-east-2': 'ami-0b29b6e62f2343b
 
 # other default things that could be changed
 
+security_group_name = "WebServer"
+security_group_description = "Inbound 443 and 80"
 
 
 def main(vpcid,region,name,keypair):
@@ -74,10 +76,15 @@ def main(vpcid,region,name,keypair):
     )
     print(response)
 
+   ### create the security groups
+   SecurityGroup=setup_security_group(group_name, group_description, vpcid)
+
+   print(SecurityGroup)
+
 ### Stole this bit from
 ### https://docs.aws.amazon.com/code-samples/latest/catalog/python-ec2-ec2_basics-ec2_setup.py.html
 
-def setup_security_group(group_name, group_description, ssh_ingress_ip=None):
+def setup_security_group(group_name, group_description, vpcid):
     """
     Creates a security group in the default virtual private cloud (VPC) of the
     current account, then adds rules to the security group to allow access to
@@ -89,19 +96,10 @@ def setup_security_group(group_name, group_description, ssh_ingress_ip=None):
                            to port 22 over TCP, used for SSH.
     :return: The newly created security group.
     """
-    try:
-        default_vpc = list(ec2.vpcs.filter(
-            Filters=[{'Name': 'isDefault', 'Values': ['true']}]))[0]
-        logger.info("Got default VPC %s.", default_vpc.id)
-    except ClientError:
-        logger.exception("Couldn't get VPCs.")
-        raise
-    except IndexError:
-        logger.exception("No default VPC in the list.")
-        raise
+    ## removed the code to find the default VPC since I want it specified
 
     try:
-        security_group = default_vpc.create_security_group(
+        security_group = vpcid.create_security_group(
             GroupName=group_name, Description=group_description)
         logger.info(
             "Created security group %s in VPC %s.", group_name, default_vpc.id)
@@ -119,11 +117,7 @@ def setup_security_group(group_name, group_description, ssh_ingress_ip=None):
             'IpProtocol': 'tcp', 'FromPort': 443, 'ToPort': 443,
             'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
         }]
-        if ssh_ingress_ip is not None:
-            ip_permissions.append({
-                # SSH ingress open to only the specified IP address
-                'IpProtocol': 'tcp', 'FromPort': 22, 'ToPort': 22,
-                'IpRanges': [{'CidrIp': f'{ssh_ingress_ip}/32'}]})
+        ## removed ssh - not cool
         security_group.authorize_ingress(IpPermissions=ip_permissions)
         logger.info("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
                     "but only %s for SSH.", security_group.id, ssh_ingress_ip)
