@@ -11,11 +11,11 @@ def main(vpcid,region,name):
     print("vpc:", vpcid, " Region: ", region, " name: ", name)
 
     try:
-      ec2 = boto3.client('ec2')
+      ec2 = boto3.resource('ec2')
     except Exception as e: print(e)
 
     try:
-      vpc=ec2.Vpc(vpcid)
+      vpc = ec2.Vpc(vpcid)
     except Exception as e: print("VPC not found: ", e)
 
 
