@@ -77,14 +77,14 @@ def main(vpcid,region,name,keypair):
     print(response)
 
       ### create the security groups
-    SecurityGroup=setup_security_group(security_group_name, security_group_description, vpcid)
+    SecurityGroup=setup_security_group(security_group_name, security_group_description,ec2)
 
     print(SecurityGroup)
 
 ### Stole this bit from
 ### https://docs.aws.amazon.com/code-samples/latest/catalog/python-ec2-ec2_basics-ec2_setup.py.html
 
-def setup_security_group(group_name, group_description, vpcid):
+def setup_security_group(group_name, group_description, ec2cl):
     """
     Creates a security group in the default virtual private cloud (VPC) of the
     current account, then adds rules to the security group to allow access to
@@ -99,7 +99,7 @@ def setup_security_group(group_name, group_description, vpcid):
     ## removed the code to find the default VPC since I want it specified
 
     try:
-        security_group = vpcid.create_security_group(
+        security_group = ec2cl.create_security_group(
             GroupName=group_name, Description=group_description)
         logger.info(
             "Created security group %s in VPC %s.", group_name, default_vpc.id)
