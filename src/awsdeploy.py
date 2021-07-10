@@ -105,7 +105,7 @@ def setup_security_group(group_name, group_description, ec2cl):
 #             "Created security group %s in VPC %s.", group_name, default_vpc.id)
     except  Exception as e:
 #         logger.exception("Couldn't create security group %s.", group_name)
-#         raise
+          raise
 
     try:
         ip_permissions = [{
@@ -123,7 +123,7 @@ def setup_security_group(group_name, group_description, ec2cl):
                     "but only %s for SSH.", security_group.id, ssh_ingress_ip)
     except Exception as e:
         print("Couldnt authorize inbound rules for %s.", group_name)
-        raise
+
     else:
         return security_group
 
