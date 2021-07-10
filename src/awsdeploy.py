@@ -64,6 +64,18 @@ def main(vpcid,region,name,keypair):
       print("Keypair not found: ", e)
       sys.exit(1)
 
+    SecurityGroup=setup_security_group(security_group_name, security_group_description, ec2, ec2Res)
+
+    try:
+      instances = ec2.run_instances(
+              ImageId=ami,
+              MinCount=1,
+              MaxCount=1,
+              InstanceType="t4g.nano",
+              KeyName=keyPair.name
+      )
+    except Exception as e:
+
    # quick check to see what is there
 
     response = ec2.describe_instances(
@@ -76,8 +88,6 @@ def main(vpcid,region,name,keypair):
     )
     #print(response)
 
-      ### create the security groups
-    SecurityGroup=setup_security_group(security_group_name, security_group_description, ec2, ec2Res)
 
     print(SecurityGroup)
 
