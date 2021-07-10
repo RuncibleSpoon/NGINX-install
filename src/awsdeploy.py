@@ -77,7 +77,7 @@ def main(vpcid,region,name,keypair):
     print(response)
 
       ### create the security groups
-    SecurityGroup=setup_security_group(security_group_name, security_group_description,ec2cl,ec2)
+    SecurityGroup=setup_security_group(security_group_name, security_group_description,ec2,ec2Res)
 
     print(SecurityGroup)
 
@@ -118,7 +118,7 @@ def setup_security_group(group_name, group_description, ec2,ec2Res):
             'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
         }]
         ## removed ssh - not cool
-        ec2res.authorize_ingress(IpPermissions=ip_permissions)
+        ec2Res.authorize_ingress(IpPermissions=ip_permissions)
         print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
                     "but only %s for SSH.", security_group.id, ssh_ingress_ip)
     except Exception as e:
