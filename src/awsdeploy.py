@@ -101,7 +101,7 @@ def setup_security_group(group_name, group_description, ec2,ec2Res):
     try:
         security_group = ec2.create_security_group(
             GroupName=group_name, Description=group_description)
-       sgID=security_group[GroupId]
+        sgID=security_group[GroupId]
 #         logger.info(
         print("Created security group ", security_group, "group id: ", sgID)
     except  Exception as e:
