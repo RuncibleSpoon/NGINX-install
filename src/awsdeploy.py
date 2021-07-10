@@ -84,7 +84,7 @@ def main(vpcid,region,name,keypair):
 ### Stole this bit from
 ### https://docs.aws.amazon.com/code-samples/latest/catalog/python-ec2-ec2_basics-ec2_setup.py.html
 
-def setup_security_group(group_name, group_description, ec2cl,ec2):
+def setup_security_group(group_name, group_description, ec2,ec2Res):
     """
     Creates a security group in the default virtual private cloud (VPC) of the
     current account, then adds rules to the security group to allow access to
@@ -118,7 +118,7 @@ def setup_security_group(group_name, group_description, ec2cl,ec2):
             'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
         }]
         ## removed ssh - not cool
-        ec2.authorize_ingress(IpPermissions=ip_permissions)
+        ec2res.authorize_ingress(IpPermissions=ip_permissions)
         print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
                     "but only %s for SSH.", security_group.id, ssh_ingress_ip)
     except Exception as e:
