@@ -102,7 +102,7 @@ def setup_security_group(group_name, group_description, ec2,ec2Res):
         security_group = ec2.create_security_group(
             GroupName=group_name, Description=group_description)
 #         logger.info(
-        print("Created security group %s in VPC %s.", group_name, default_vpc.id)
+        print("Created security group ")
     except  Exception as e:
 #         logger.exception("Couldn't create security group %s.", group_name)
           raise
