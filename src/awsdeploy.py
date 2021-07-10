@@ -79,7 +79,7 @@ def main(vpcid,region,name,keypair):
       ### create the security groups
     SecurityGroup=setup_security_group(security_group_name, security_group_description, ec2, ec2Res)
 
-    #print(SecurityGroup)
+    print(SecurityGroup)
 
 ### Stole this bit from
 ### https://docs.aws.amazon.com/code-samples/latest/catalog/python-ec2-ec2_basics-ec2_setup.py.html
@@ -123,8 +123,8 @@ def setup_security_group(group_name, group_description, ec2, ec2Res):
         sec_group=ec2Res.SecurityGroup(sgID)
         print("foo: " ,sec_group.group_id)
         sec_group.authorize_ingress(IpPermissions=ip_permissions)
-        #print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
-                    "but only %s for SSH.", security_group.id, ssh_ingress_ip)
+        #print("Set inbound rules for %s to allow all inbound HTTP and HTTPS ")
+
     except Exception as e:
         print("Couldnt authorize inbound rules for %s.", group_name, "  :", e)
 
