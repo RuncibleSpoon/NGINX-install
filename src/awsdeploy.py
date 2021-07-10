@@ -119,6 +119,7 @@ def setup_security_group(group_name, group_description, ec2,ec2Res):
             'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
         }]
         ## removed ssh - not cool
+        print("secuirty group id: ", sgID)
         sec_group=ec2Res.SecurityGroup(sgID)
         sec_group.authorize_ingress(IpPermissions=ip_permissions)
         print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
