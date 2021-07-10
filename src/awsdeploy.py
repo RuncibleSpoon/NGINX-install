@@ -123,7 +123,7 @@ def setup_security_group(group_name, group_description, ec2, ec2Res):
         sec_group=ec2Res.SecurityGroup(sgID)
         print("foo: " ,sec_group.group_id)
         sec_group.authorize_ingress(IpPermissions=ip_permissions)
-        print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
+        #print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
                     "but only %s for SSH.", security_group.id, ssh_ingress_ip)
     except Exception as e:
         print("Couldnt authorize inbound rules for %s.", group_name, "  :", e)
