@@ -14,7 +14,7 @@ image = {'us-west-2': 'ami-01773ce53581acf22', 'us-east-2': 'ami-0b29b6e62f2343b
 
 # other default things that could be changed
 
-security_group_name = "WebServer"
+security_group_name = "WebServer2"
 security_group_description = "Inbound 443 and 80"
 
 
@@ -122,7 +122,7 @@ def setup_security_group(group_name, group_description, ec2cl):
         print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
                     "but only %s for SSH.", security_group.id, ssh_ingress_ip)
     except Exception as e:
-        print("Couldnt authorize inbound rules for %s.", group_name)
+        print("Couldnt authorize inbound rules for %s.", group_name, "  :", e)
 
     else:
         return security_group
