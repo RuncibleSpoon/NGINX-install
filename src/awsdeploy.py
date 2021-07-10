@@ -101,11 +101,11 @@ def setup_security_group(group_name, group_description, ec2cl):
     try:
         security_group = ec2cl.create_security_group(
             GroupName=group_name, Description=group_description)
-        logger.info(
-            "Created security group %s in VPC %s.", group_name, default_vpc.id)
-    except ClientError:
-        logger.exception("Couldn't create security group %s.", group_name)
-        raise
+#         logger.info(
+#             "Created security group %s in VPC %s.", group_name, default_vpc.id)
+    except  Exception as e:
+#         logger.exception("Couldn't create security group %s.", group_name)
+#         raise
 
     try:
         ip_permissions = [{
@@ -119,10 +119,10 @@ def setup_security_group(group_name, group_description, ec2cl):
         }]
         ## removed ssh - not cool
         security_group.authorize_ingress(IpPermissions=ip_permissions)
-        logger.info("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
+        print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
                     "but only %s for SSH.", security_group.id, ssh_ingress_ip)
-    except ClientError:
-        logger.exception("Couldnt authorize inbound rules for %s.", group_name)
+    except Exception as e:
+        print("Couldnt authorize inbound rules for %s.", group_name)
         raise
     else:
         return security_group
