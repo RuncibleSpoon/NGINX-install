@@ -101,30 +101,30 @@ def setup_security_group(group_name, group_description, ec2,ec2Res):
     try:
         security_group = ec2.create_security_group(
             GroupName=group_name, Description=group_description)
-      #  sgID=security_group[GroupId]
+       sgID=security_group[GroupId]
 #         logger.info(
-        print("Created security group ", security_group, "group id: ")
+        print("Created security group ", security_group, "group id: ", sgID)
     except  Exception as e:
 #         logger.exception("Couldn't create security group %s.", group_name)
           raise
 
-    try:
-        ip_permissions = [{
-            # HTTP ingress open to anyone
-            'IpProtocol': 'tcp', 'FromPort': 80, 'ToPort': 80,
-            'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
-        }, {
-            # HTTPS ingress open to anyone
-            'IpProtocol': 'tcp', 'FromPort': 443, 'ToPort': 443,
-            'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
-        }]
-        ## removed ssh - not cool
-        sec_group=ec2Res.SecurityGroup(sgID)
-        sec_group.authorize_ingress(IpPermissions=ip_permissions)
-        print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
-                    "but only %s for SSH.", security_group.id, ssh_ingress_ip)
-    except Exception as e:
-        print("Couldnt authorize inbound rules for %s.", group_name, "  :", e)
+#     try:
+#         ip_permissions = [{
+#             # HTTP ingress open to anyone
+#             'IpProtocol': 'tcp', 'FromPort': 80, 'ToPort': 80,
+#             'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
+#         }, {
+#             # HTTPS ingress open to anyone
+#             'IpProtocol': 'tcp', 'FromPort': 443, 'ToPort': 443,
+#             'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
+#         }]
+#         ## removed ssh - not cool
+#         sec_group=ec2Res.SecurityGroup(sgID)
+#         sec_group.authorize_ingress(IpPermissions=ip_permissions)
+#         print("Set inbound rules for %s to allow all inbound HTTP and HTTPS "
+#                     "but only %s for SSH.", security_group.id, ssh_ingress_ip)
+#     except Exception as e:
+#         print("Couldnt authorize inbound rules for %s.", group_name, "  :", e)
 
     else:
         return security_group
