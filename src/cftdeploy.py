@@ -68,7 +68,7 @@ def main(vpcid,region,name,keypair):
     ### Setup an S3 bucket for our CFT and config files to live in
     try:
         s3 = boto3.client("s3")
-        s3.create_bucket(Bucket="mybucket", CreateBucketConfiguration={ 'LocationConstraint': region }))
+        s3.create_bucket(Bucket="mybucket", CreateBucketConfiguration={ 'LocationConstraint': region })
         print('S3bucket Created')
 #     SecurityGroup=setup_security_group(security_group_name, security_group_description, ec2, ec2Res)
 #
