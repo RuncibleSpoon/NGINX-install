@@ -88,8 +88,10 @@ def  deleteBucket(s3Bucket):
     s3 = boto3.resource("s3")
     bucket = s3.Bucket(s3Bucket)
     # suggested by Jordon Philips
-    bucket.objects.all().delete()
-    s3.Bucket(bucket).delete()
+    res = bucket.objects.all().delete()
+    print(res)
+    res= s3.Bucket(bucket).delete()
+    print(res)
   except Exception as e:
                    print("Bucket not deleted: ", e)
                    sys.exit(1)
