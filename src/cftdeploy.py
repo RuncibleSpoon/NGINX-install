@@ -162,20 +162,20 @@ def main(vpcid,region,name,keypair):
       deleteBucket(s3BucketName)
       sys.exit(1)
 
-    try:
-      waiter = cftclient.get_waiter('stack_create_complete')
-    except Exception as e:
-                 print("Could not create waiter", e)
-                 deleteBucket(s3BucketName)
-                 sys.exit(1)
-
-    waiter.wait(
-      StackName=stackname,
-      WaiterConfig={
-              'Delay': 30,
-              'MaxAttempts': 10
-          }
-    )
+#     try:
+#       waiter = cftclient.get_waiter('stack_create_complete')
+#     except Exception as e:
+#                  print("Could not create waiter", e)
+#                  deleteBucket(s3BucketName)
+#                  sys.exit(1)
+#
+#     waiter.wait(
+#       StackName=stackname,
+#       WaiterConfig={
+#               'Delay': 30,
+#               'MaxAttempts': 10
+#           }
+#     )
 
     ### Delete the S3 Bucket
 
