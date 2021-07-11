@@ -90,16 +90,20 @@ def main(vpcid,region,name,keypair):
     #print(arr, "\n")
     # use the file list to upload to the s3 bucket
     # use the bucket reseouce object not the client conneciton
-    for file_name in arr:
-      print('uploading ',file_name)
-      # should really paramerize the path
-      file_path = './content/' + file_name
-      bucket.upload_file(
-        Filename=file_path,
-        Key=file_name,
-        ExtraArgs={'ACL': 'public-read'}
-      )
-
+    try:
+        for file_name in arr:
+          print('uploading ',file_name)
+          # should really paramerize the path
+          file_path = './content/' + file_name
+          bucket.upload_file(
+            Filename=file_path,
+            Key=file_name,
+            ExtraArgs={'ACL': 'public-read'}
+          )
+    except Exception as e:
+        print("file upload failure: ", e)
+        deleteBucket(s3BucketName)
+        sys.exit(1)
 
 
     ### Delete the S3 Bucket
