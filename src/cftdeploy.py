@@ -77,8 +77,8 @@ def main(vpcid,region,name,keypair):
         bucket = s3res.Bucket(s3BucketName)
 
         print('S3bucket Created')
-        bucket_location = s3.get_bucket_location(Bucket=s3BucketName)
-        print ('bucket location is ', bucket_location)
+
+
 
 
     except Exception as e:
@@ -109,9 +109,12 @@ def main(vpcid,region,name,keypair):
         sys.exit(1)
 
    ##### Files are uploaded so lets try to create a stack from the template
-
-
-
+    try:
+      cftclient = boto3.client('cloudformation')
+    except Exception as e:
+      print("could not create stack ", e)
+      deleteBucket(s3BucketName)
+      sys.exit(1)
 
     ### Delete the S3 Bucket
 
