@@ -177,16 +177,14 @@ def main(vpcid,region,name,keypair):
                  print("Could not create waiter", e)
                  deleteBucket(s3BucketName)
                  sys.exit(1)
-#
-#     waiter.wait(
-#       StackName=stackname,
-#       WaiterConfig={
-#               'Delay': 30,
-#               'MaxAttempts': 10
-#           }
-#     )
+
+    ### lets see if we can get the status of the stack
+
 
     ### Delete the S3 Bucket
+    stack = cft.Stack(stackname)
+
+    print(stack.status)
 
     deleteBucket(s3BucketName)
 
