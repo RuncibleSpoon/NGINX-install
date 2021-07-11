@@ -8,6 +8,7 @@ import sys
 import uuid
 from botocore.config import Config
 
+
 # AWS image to use
 # this could be replaced with AWS systems manager
 
@@ -24,8 +25,8 @@ def main(vpcid,region,name,keypair):
    # ami=image[region]
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
     print(sessionId)
-    s3Bucket = 's3b' + sessionId
-    print(s3Bucket)
+    s3BucketName = 's3b' + sessionId
+    print(s3BucketName)
 
     my_config = Config(
         region_name = region,
@@ -68,11 +69,19 @@ def main(vpcid,region,name,keypair):
     ### Setup an S3 bucket for our CFT and config files to live in
     try:
         s3 = boto3.client("s3")
-        s3.create_bucket(Bucket=s3Bucket, CreateBucketConfiguration={ 'LocationConstraint': region })
+        s3Bucket = s3.create_bucket(Bucket=s3BucketName, CreateBucketConfiguration={ 'LocationConstraint': region })
         print('S3bucket Created')
     except Exception as e:
                  print("Bucket not created: ", e)
                  sys.exit(1)
+
+    ### Add template and nginx source files to bucket
+
+#     bucket.upload_file(
+#           Filename=file_path,
+#           Key=file_name,
+#           ExtraArgs={'ACL': 'public-read'}
+#         )
 
 
 
@@ -86,12 +95,11 @@ def  deleteBucket(s3Bucket):
 
   try:
     s3 = boto3.resource("s3")
-    bucket = s3.Bucket(s3Bucket)
-
+    bucket = s3Bucket
+    #bucket = s3.Bucket(s3Bucket)
     print(bucket)
     # suggested by Jordon Philips
     res = bucket.objects.all().delete()
-    print(res)
     res= s3.Bucket(bucket.name).delete()
     print('Bucket ', s3Bucket, ' deleted')
   except Exception as e:
