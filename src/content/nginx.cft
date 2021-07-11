@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion : "2010-09-09"
+Description: This template also deploys an Ubuntu 20.04 EC2 instance and installs NGINX.
+             The configuration file and some sample conte are pulled from an s3 bucket  on boot.
+
+Mappings:
+  RegionMap:
+    us-east-2:
+      "ubuntu": "ami-0ff8a91507f77f867"
+    US-west-2:
+      "ubuntu": "ami-0b29b6e62f2343b46"
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that is prefixed to resource names
+    Type: String
+    Default: nginxDemo
+  VpcId:
+    Description: VPC ID of an existing VPC
+    Type: String
+  InstanceType:
+    Type: String
+      Description: Choosing  t2 micro because it is free
+      Default: t2.micro
+  KeyName:
+    Description: SSH Keypair to login to the instance
+    Type: AWS::EC2::KeyPair::KeyName
+  SubnetID:
+    Description: Subnet id to assign nginx to
+
+Resources:
+
+  nginxInstance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: !FindInMap [ RegionMap, !Ref "AWS::Region", nginx ]
+      InstanceType: !Ref Instancetype
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      KeyName: !Ref KeyName
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+      SubnetId: !Ref SubnetID
+
+  WebSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VPC
+      GroupDescription: Enable HTTPS access via user defined port
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 80
+          IpProtocol: tcp
+          ToPort: 80
+
