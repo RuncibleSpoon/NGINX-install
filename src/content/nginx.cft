@@ -44,7 +44,7 @@ Resources:
   WebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      VpcId: !Ref VPC
+      VpcId: !Ref VpcId
       GroupDescription: Enable HTTPS access via user defined port
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
