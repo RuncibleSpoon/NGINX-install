@@ -68,9 +68,16 @@ def main(vpcid,region,name,keypair):
 
     ### Setup an S3 bucket for our CFT and config files to live in
     try:
+        # create S3 client connection
         s3 = boto3.client("s3")
         s3Bucket = s3.create_bucket(Bucket=s3BucketName, CreateBucketConfiguration={ 'LocationConstraint': region })
+        # Create S3 resource connection
+        s3res = boto3.resource("s3")
+        # retrieve bucket object - could this be more elegant?
+        bucket = s3res.Bucket(s3BucketName)
+
         print('S3bucket Created')
+
     except Exception as e:
                  print("Bucket not created: ", e)
                  sys.exit(1)
@@ -82,11 +89,12 @@ def main(vpcid,region,name,keypair):
     arr=os.listdir('./content')
     #print(arr, "\n")
     # use the file list to upload to the s3 bucket
+    # use the bucket reseouce object not the client conneciton
     for file_name in arr:
       print('uploading ',file_name)
       # should really paramerize the path
       file_path = './content/' + file_name
-      s3Bucket.upload_file(
+      bucket.upload_file(
         Filename=file_path,
         Key=file_name,
         ExtraArgs={'ACL': 'public-read'}
