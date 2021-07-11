@@ -151,8 +151,8 @@ def main(vpcid,region,name,keypair):
                         'ParameterValue': configUrl
            },
            {
-                        'ParameterKey': 'templateUrl',
-                        'ParameterValue': templateUrl
+                        'ParameterKey': 'contentUrl',
+                        'ParameterValue': contentUrl
 
            }
         ]
