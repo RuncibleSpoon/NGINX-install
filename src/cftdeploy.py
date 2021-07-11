@@ -157,12 +157,13 @@ def main(vpcid,region,name,keypair):
            }
         ]
       )
+      print(response)
     except Exception as e:
       print("could not create stack ", e)
       deleteBucket(s3BucketName)
       sys.exit(1)
 
-    print('CFT waiters', cftclient.waiter_names)
+    print('Please Wait while the Stack Completes)
     try:
       waiter = cftclient.get_waiter('stack_create_complete')
       waiter.wait(
