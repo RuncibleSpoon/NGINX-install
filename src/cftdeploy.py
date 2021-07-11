@@ -19,7 +19,7 @@ from botocore.config import Config
 security_group_name = "WebServer2"
 security_group_description = "Inbound 443 and 80"
 sessionId = str(uuid.uuid1().int)
-
+stackname = "NGINXStack" + sessionId
 
 def main(vpcid,region,name,keypair):
    # ami=image[region]
@@ -128,7 +128,7 @@ def main(vpcid,region,name,keypair):
       print('Creating stack')
       cftclient = boto3.client('cloudformation',config=my_config)
       response = cftclient.create_stack(
-        StackName='string',
+        StackName=stackname,
         TemplateURL=templateUrl,
         Parameters=[
            {
