@@ -78,11 +78,12 @@ def main(vpcid,region,name,keypair):
     ### Add template and nginx source files to bucket
 
     ### walk the content directory to build a file list
-
+    print('Building upload file list')
     arr=os.listdir('./content')
-
-    print(arr)
-
+    print(arr, "\n")
+    # use the file list to upload to the s3 bucket
+    for file in arr:
+      print(file)
 #     S3bucket.upload_file(
 #           Filename=file_path,
 #           Key=file_name,
