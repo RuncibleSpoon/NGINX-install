@@ -77,7 +77,13 @@ def main(vpcid,region,name,keypair):
 
     ### Add template and nginx source files to bucket
 
-#     bucket.upload_file(
+    ### walk the content directory to build a file list
+
+    arr=os.listdir(./content)
+
+    print(arr)
+
+#     S3bucket.upload_file(
 #           Filename=file_path,
 #           Key=file_name,
 #           ExtraArgs={'ACL': 'public-read'}
