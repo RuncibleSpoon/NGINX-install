@@ -86,7 +86,7 @@ def main(vpcid,region,name,keypair):
       print('uploading ',file_name)
       # should really paramerize the path
       file_path = './content/' + file_name
-      S3Bucket.upload_file(
+      s3Bucket.upload_file(
         Filename=file_path,
         Key=file_name,
         ExtraArgs={'ACL': 'public-read'}
