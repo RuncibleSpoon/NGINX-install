@@ -87,16 +87,16 @@ def main(vpcid,region,name,keypair):
 
     ### Delete the S3 Bucket
 
-    deleteBucket(s3Bucket)
+    deleteBucket(s3BucketName)
 
 ### Function to empty and delete the bucket
 
-def  deleteBucket(s3Bucket):
+def  deleteBucket(s3BucketName):
 
   try:
     s3 = boto3.resource("s3")
-    bucket = s3Bucket
-    #bucket = s3.Bucket(s3Bucket)
+    #bucket = s3Bucket
+    bucket = s3.Bucket(s3BucketName)
     print(bucket)
     # suggested by Jordon Philips
     res = bucket.objects.all().delete()
