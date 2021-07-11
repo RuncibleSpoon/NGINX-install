@@ -129,6 +129,7 @@ def main(vpcid,region,name,keypair):
    ### need to add a stack wait thing
     try:
       print('Creating stack')
+      cftres = boto3.resource('cloudformation',config=my_config)
       cftclient = boto3.client('cloudformation',config=my_config)
       response = cftclient.create_stack(
         StackName=stackname,
@@ -182,7 +183,7 @@ def main(vpcid,region,name,keypair):
 
 
     ### Delete the S3 Bucket
-    stack = cft.Stack(stackname)
+    stack = cftres.Stack(stackname)
 
     print(stack.status)
 
