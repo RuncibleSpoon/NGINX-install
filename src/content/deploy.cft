@@ -1,13 +1,23 @@
 Description:  This template deploys a VPC, with a pair of public and private subnets spread
   across two Availability Zones. It deploys an internet gateway, with a default
   route on the public subnets. It deploys a pair of NAT gateways (one in each AZ),
-  and default routes for them in the private subnets.
+  and default routes for them in the private subnets. This template also deploys an Ubuntu
+  20.04 EC2 instance and installs NGINX. The configuration file and some sample content
+  are pulled from a github hosted repo on boot.
+
+Mappings:
+  RegionMap:
+    us-east-2:
+      "ubuntu": "ami-0ff8a91507f77f867"
+    US-west-2:
+      "ubuntu": "ami-0b29b6e62f2343b46"
+
 
 Parameters:
   EnvironmentName:
     Description: An environment name that is prefixed to resource names
     Type: String
-    Default: CMXjam
+    Default: nginxDemo
 
   VpcCIDR:
     Description: Please enter the IP range (CIDR notation) for this VPC
@@ -33,6 +43,15 @@ Parameters:
     Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
     Type: String
     Default: 10.192.21.0/24
+
+    InstanceType:
+        Type: String
+        Description: Choosing  t2 micro because it is free
+        Default: t2.micro
+      KeyName:
+        Description: SSH Keypair to login to the instance
+        Type: AWS::EC2::KeyPair::KeyName
+        Default: demokeypair
 
 Resources:
   VPC:
@@ -217,6 +236,17 @@ Resources:
           FromPort: 80
           IpProtocol: tcp
           ToPort: 80
+
+
+  nginxInstance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", nginx]
+      InstanceType: m1.small
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      Key
+
+
 
 Outputs:
   VPC:
