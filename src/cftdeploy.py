@@ -24,7 +24,7 @@ def main(vpcid,region,name,keypair):
    # ami=image[region]
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
     print(sessionId.int)
-    s3Bucket = 'S3B'.sessionId.int
+    s3Bucket = 'S3B'.sessionId
     print(s3Bucket)
 
     my_config = Config(
