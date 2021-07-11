@@ -162,6 +162,16 @@ def main(vpcid,region,name,keypair):
       deleteBucket(s3BucketName)
       sys.exit(1)
 
+    waiter=cftclient.get_waiter('StackCreateComplete')
+
+    waiter.wait(
+      StackName=stackname,
+      WaiterConfig={
+              'Delay': 30,
+              'MaxAttempts': 10
+          }
+    )
+
     ### Delete the S3 Bucket
 
     deleteBucket(s3BucketName)
