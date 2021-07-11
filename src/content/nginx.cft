@@ -27,7 +27,7 @@ Parameters:
   SubnetID:
     Description: Subnet id to assign nginx to
     Type: String
-  templateUrl:
+  configUrl:
     Description: location of nginx.conf
     Type: String
   contentUrl:
