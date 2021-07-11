@@ -183,8 +183,11 @@ def main(vpcid,region,name,keypair):
 
     stack = cftres.Stack(stackname)
 
-    print(stack.stack_status)
-
+    if stack.stack_status == 'CREATE_COMPLETE':
+      print('Congratulations your NGIX instance has been deployed')
+      print(stack.outputs)
+    else:
+      print('stack status failed with ', stack.stack_status)
 
 
   ### Delete the S3 Bucket
