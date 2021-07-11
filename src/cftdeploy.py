@@ -73,6 +73,29 @@ def main(vpcid,region,name,keypair):
     except Exception as e:
                  print("Bucket not created: ", e)
                  sys.exit(1)
+
+
+
+    ### Delete the S3 Bucket
+
+    deleteBucket(s3Bucket)
+
+### Function to empty and delete the bucket
+
+def  deleteBucket(s3Bucket):
+
+  try:
+    s3 = boto3.resource("s3")
+    bucket = s3.Bucket(s3Bucket)
+    # suggested by Jordon Philips
+    bucket.objects.all().delete()
+    s3.Bucket(bucket).delete()
+  except Exception as e:
+                   print("Bucket not deleted: ", e)
+                   sys.exit(1)
+
+
+
 #     SecurityGroup=setup_security_group(security_group_name, security_group_description, ec2, ec2Res)
 #
 #     try:
