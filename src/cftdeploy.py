@@ -70,6 +70,9 @@ def main(vpcid,region,name,keypair):
         s3 = boto3.client("s3")
         s3.create_bucket(Bucket="mybucket", CreateBucketConfiguration={ 'LocationConstraint': region })
         print('S3bucket Created')
+    except Exception as e:
+                 print("Bucket not created: ", e)
+                 sys.exit(1)
 #     SecurityGroup=setup_security_group(security_group_name, security_group_description, ec2, ec2Res)
 #
 #     try:
