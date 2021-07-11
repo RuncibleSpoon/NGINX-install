@@ -55,6 +55,7 @@ def main(vpcid,region,name,keypair):
     try:
       Vpc = ec2Res.Vpc(vpcid)
       Vpc.load()
+
     except Exception as e:
       print("VPC error ", vpcid , " not found in ", region, " : ", e)
       sys.exit(1)
@@ -65,6 +66,16 @@ def main(vpcid,region,name,keypair):
     except Exception as e:
       print("Keypair not found: ", e)
       sys.exit(1)
+
+    try:
+      subnets = ec2Res.subnets.filter(
+          Filters=[{"Name": "vpc-id", "Values": [vpcid]}]
+      )
+      subnet_ids = [sn.id for sn in subnets]
+      print(subnet_ids)
+      except Exception as e:
+            print("Subnets in VPC ",vpcid, " not found: " e)
+            sys.exit(1)
 
     ### Setup an S3 bucket for our CFT and config files to live in
     try:
@@ -110,19 +121,24 @@ def main(vpcid,region,name,keypair):
         sys.exit(1)
 
    ##### Files are uploaded so lets try to create a stack from the template
-    try:
-      print('Creating stack')
-      cftclient = boto3.client('cloudformation')
-      response = cftclient.create_stack(
-        StackName='string',
-        TemplateURL=templateUrl,
-            Parameters=[
-
-            )
-    except Exception as e:
-      print("could not create stack ", e)
-      deleteBucket(s3BucketName)
-      sys.exit(1)
+#     try:
+#       print('Creating stack')
+#       cftclient = boto3.client('cloudformation')
+#       response = cftclient.create_stack(
+#         StackName='string',
+#         TemplateURL=templateUrl,
+#         Parameters=[
+#             {
+#               'VpcId': vpcid,
+#               'SubnetID': subnetid,
+#               'KeyName': keypair
+#             }
+#         ]
+#       )
+#     except Exception as e:
+#       print("could not create stack ", e)
+#       deleteBucket(s3BucketName)
+#       sys.exit(1)
 
     ### Delete the S3 Bucket
 
