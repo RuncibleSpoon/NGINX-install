@@ -23,7 +23,7 @@ sessionId = str(uuid.uuid1().int)
 def main(vpcid,region,name,keypair):
    # ami=image[region]
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
-    print(sessionId.int)
+    print(sessionId)
     s3Bucket = 'S3B'.sessionId
     print(s3Bucket)
 
