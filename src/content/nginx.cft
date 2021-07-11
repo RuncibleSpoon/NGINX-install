@@ -19,8 +19,8 @@ Parameters:
     Type: String
   InstanceType:
     Type: String
-      Description: Choosing  t2 micro because it is free
-      Default: t2.micro
+    Description: Choosing  t2 micro because it is free
+    Default: t2.micro
   KeyName:
     Description: SSH Keypair to login to the instance
     Type: AWS::EC2::KeyPair::KeyName
