@@ -163,12 +163,12 @@ def main(vpcid,region,name,keypair):
       sys.exit(1)
 
     print('CFT waiters', cftclient.waiter_names)
-#     try:
-#       waiter = cftclient.get_waiter('stack_create_complete')
-#     except Exception as e:
-#                  print("Could not create waiter", e)
-#                  deleteBucket(s3BucketName)
-#                  sys.exit(1)
+    try:
+      waiter = cftclient.get_waiter('stack_create_complete')
+    except Exception as e:
+                 print("Could not create waiter", e)
+                 deleteBucket(s3BucketName)
+                 sys.exit(1)
 #
 #     waiter.wait(
 #       StackName=stackname,
