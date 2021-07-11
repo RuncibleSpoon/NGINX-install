@@ -45,6 +45,13 @@ Resources:
       SecurityGroupIds:
         - !Ref WebSecurityGroup
       SubnetId: !Ref SubnetID
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          apt update -y
+          apt install -y aws-cfn-bootstrap cloud-init aws-cli
+          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region} --configsets ec2_setup
+          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region}
 
   WebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
