@@ -35,7 +35,6 @@ Resources:
     Properties:
       ImageId: !FindInMap [ RegionMap, !Ref "AWS::Region", ubuntu ]
       InstanceType: !Ref InstanceType
-      AvailabilityZone: !Select [ 0, !GetAZs '' ]
       KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref WebSecurityGroup

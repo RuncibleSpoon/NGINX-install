@@ -75,6 +75,7 @@ def main(vpcid,region,name,keypair):
       print(subnet_ids)
       subnetid=subnet_ids[0]
       print('Subnet ' , subnetid , ' selected' )
+      #availabilityZone = ec2Res.subnets()
     except Exception as e:
       print("Subnets in VPC ",vpcid, " not found: " , e)
       sys.exit(1)
