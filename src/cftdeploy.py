@@ -163,7 +163,7 @@ def main(vpcid,region,name,keypair):
       deleteBucket(s3BucketName)
       sys.exit(1)
 
-    print('Please Wait while the Stack Completes)
+    print('Please Wait while the Stack Completes')
     try:
       waiter = cftclient.get_waiter('stack_create_complete')
       waiter.wait(
