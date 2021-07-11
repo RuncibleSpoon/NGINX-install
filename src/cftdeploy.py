@@ -77,6 +77,9 @@ def main(vpcid,region,name,keypair):
         bucket = s3res.Bucket(s3BucketName)
 
         print('S3bucket Created')
+        bucket_location = s3.get_bucket_location(Bucket=s3BucketName)['locationconstraint']
+        print ('bucket location is ', bucket_location)
+
 
     except Exception as e:
                  print("Bucket not created: ", e)
@@ -89,7 +92,7 @@ def main(vpcid,region,name,keypair):
     arr=os.listdir('./content')
     #print(arr, "\n")
     # use the file list to upload to the s3 bucket
-    # use the bucket reseouce object not the client conneciton
+    # use the bucket resource object not the client conneciton
     try:
         for file_name in arr:
           print('uploading ',file_name)
@@ -105,6 +108,10 @@ def main(vpcid,region,name,keypair):
         deleteBucket(s3BucketName)
         sys.exit(1)
 
+   ##### Files are uploaded so lets try to create a stack from the template
+
+
+
 
     ### Delete the S3 Bucket
 
@@ -118,14 +125,14 @@ def  deleteBucket(s3BucketName):
     s3 = boto3.resource("s3")
     #bucket = s3Bucket
     bucket = s3.Bucket(s3BucketName)
-    print(bucket)
+    #print(bucket)
     # suggested by Jordon Philips
     res = bucket.objects.all().delete()
     res= s3.Bucket(bucket.name).delete()
     print('Bucket ', s3BucketName, ' deleted')
   except Exception as e:
-                   print("Bucket " , S3BucketName, " not deleted: ", e)
-                   sys.exit(1)
+    print("Bucket " , S3BucketName, " not deleted: ", e)
+    sys.exit(1)
 
 
 
