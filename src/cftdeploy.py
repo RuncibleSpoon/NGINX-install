@@ -80,15 +80,17 @@ def main(vpcid,region,name,keypair):
     ### walk the content directory to build a file list
     print('Building upload file list')
     arr=os.listdir('./content')
-    print(arr, "\n")
+    #print(arr, "\n")
     # use the file list to upload to the s3 bucket
-    for file in arr:
-      print(file)
-#     S3bucket.upload_file(
-#           Filename=file_path,
-#           Key=file_name,
-#           ExtraArgs={'ACL': 'public-read'}
-#         )
+    for file_name in arr:
+      print('uploading ',file_name)
+      # should really paramerize the path
+      file_path = './content/' + file_name
+      S3bucket.upload_file(
+        Filename=file_path,
+        Key=file_name,
+        ExtraArgs={'ACL': 'public-read'}
+      )
 
 
 
