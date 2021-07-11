@@ -126,7 +126,7 @@ def main(vpcid,region,name,keypair):
    ### need to add a stack wait thing
     try:
       print('Creating stack')
-      cftclient = boto3.client('cloudformation')
+      cftclient = boto3.client('cloudformation',config=my_config)
       response = cftclient.create_stack(
         StackName='string',
         TemplateURL=templateUrl,

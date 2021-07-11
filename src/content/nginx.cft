@@ -4,9 +4,9 @@ Description: This template also deploys an Ubuntu 20.04 EC2 instance and install
 
 Mappings:
   RegionMap:
-    us-east-1:
+    us-east-2:
       "ubuntu": "ami-0ff8a91507f77f867"
-    US-west-1:
+    US-west-2:
       "ubuntu": "ami-0b29b6e62f2343b46"
 
 Parameters:
