@@ -77,7 +77,7 @@ def main(vpcid,region,name,keypair):
         bucket = s3res.Bucket(s3BucketName)
 
         print('S3bucket Created')
-        bucket_location = s3.get_bucket_location(Bucket=s3BucketName)['locationconstraint']
+        bucket_location = s3.get_bucket_location(Bucket=s3BucketName)
         print ('bucket location is ', bucket_location)
 
 
