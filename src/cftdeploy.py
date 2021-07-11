@@ -110,6 +110,7 @@ def main(vpcid,region,name,keypair):
 
    ##### Files are uploaded so lets try to create a stack from the template
     try:
+      print('Creating stack')
       cftclient = boto3.client('cloudformation')
     except Exception as e:
       print("could not create stack ", e)
