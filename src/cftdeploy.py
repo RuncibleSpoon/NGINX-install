@@ -181,12 +181,13 @@ def main(vpcid,region,name,keypair):
 
     ### lets see if we can get the status of the stack
 
-
-    ### Delete the S3 Bucket
     stack = cftres.Stack(stackname)
 
-    print(stack.status)
+    print(stack.stack_status)
 
+
+
+  ### Delete the S3 Bucket
     deleteBucket(s3BucketName)
 
 ### Function to empty and delete the bucket
