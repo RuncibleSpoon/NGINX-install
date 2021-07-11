@@ -17,7 +17,7 @@ from botocore.config import Config
 
 security_group_name = "WebServer2"
 security_group_description = "Inbound 443 and 80"
-sessionId = uuid.uuid1()
+sessionId = str(uuid.uuid1().int)
 
 
 def main(vpcid,region,name,keypair):
