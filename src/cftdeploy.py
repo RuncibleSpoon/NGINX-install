@@ -73,6 +73,8 @@ def main(vpcid,region,name,keypair):
       )
       subnet_ids = [sn.id for sn in subnets]
       print(subnet_ids)
+      subnetid=subnet_ids[0]
+      print('Subnet ' , subnetid , ' selected' )
     except Exception as e:
       print("Subnets in VPC ",vpcid, " not found: " , e)
       sys.exit(1)
