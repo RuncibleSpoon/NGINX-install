@@ -79,7 +79,7 @@ def main(vpcid,region,name,keypair):
 
     ### walk the content directory to build a file list
 
-    arr=os.listdir(./content)
+    arr=os.listdir('./content')
 
     print(arr)
 
