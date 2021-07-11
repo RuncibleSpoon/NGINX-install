@@ -74,7 +74,7 @@ def main(vpcid,region,name,keypair):
       subnet_ids = [sn.id for sn in subnets]
       print(subnet_ids)
     except Exception as e:
-      print("Subnets in VPC ",vpcid, " not found: " e)
+      print("Subnets in VPC ",vpcid, " not found: " , e)
       sys.exit(1)
 
     ### Setup an S3 bucket for our CFT and config files to live in
