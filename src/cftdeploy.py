@@ -5,6 +5,7 @@ import argparse
 import os
 import time
 import sys
+import uuid
 from botocore.config import Config
 
 # AWS image to use
@@ -16,12 +17,13 @@ from botocore.config import Config
 
 security_group_name = "WebServer2"
 security_group_description = "Inbound 443 and 80"
+sessionId = str(uuid.uuid(1))
 
 
 def main(vpcid,region,name,keypair):
    # ami=image[region]
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
-
+    print(sessionId)
 
 
     my_config = Config(
@@ -64,6 +66,12 @@ def main(vpcid,region,name,keypair):
       print("Keypair not found: ", e)
       sys.exit(1)
 
+    ### Setup an S3 bucket for our CFT and config files to live in
+    try:
+        s3 = boto3.client("s3")
+        s3.create_bucket(Bucket="mybucket", CreateBucketConfiguration={
+           'LocationConstraint': region }))
+        print('S3bucket Created')
 #     SecurityGroup=setup_security_group(security_group_name, security_group_description, ec2, ec2Res)
 #
 #     try:
