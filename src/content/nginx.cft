@@ -26,6 +26,7 @@ Parameters:
     Type: AWS::EC2::KeyPair::KeyName
   SubnetID:
     Description: Subnet id to assign nginx to
+    Type: String
 
 Resources:
 

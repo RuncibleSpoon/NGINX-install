@@ -131,11 +131,18 @@ def main(vpcid,region,name,keypair):
         StackName='string',
         TemplateURL=templateUrl,
         Parameters=[
-            {
-              'VpcId': vpcid,
-              'SubnetID': subnetid,
-              'KeyName': keypair
-            }
+           {
+                       'ParameterKey': 'VpcId',
+                       'ParameterValue': vpcid
+           },
+           {
+                       'ParameterKey': 'SubnetID',
+                       'ParameterValue': subnetid
+           },
+           {
+                        'ParameterKey': 'KeyName',
+                        'ParameterValue': keypair
+           }
         ]
       )
     except Exception as e:
