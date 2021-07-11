@@ -17,14 +17,14 @@ from botocore.config import Config
 
 security_group_name = "WebServer2"
 security_group_description = "Inbound 443 and 80"
-sessionId = str(uuid.uuid(1))
+sessionId = uuid.uuid(1)
 
 
 def main(vpcid,region,name,keypair):
    # ami=image[region]
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
-    print(sessionId)
-    s3Bucket = 'S3B'.sessionId
+    print(sessionId.int)
+    s3Bucket = 'S3B'.sessionId.int
     print(s3Bucket)
 
     my_config = Config(
