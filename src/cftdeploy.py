@@ -162,6 +162,7 @@ def main(vpcid,region,name,keypair):
       deleteBucket(s3BucketName)
       sys.exit(1)
 
+    print('CFT waiters', cftclient.waiter_names)
 #     try:
 #       waiter = cftclient.get_waiter('stack_create_complete')
 #     except Exception as e:
