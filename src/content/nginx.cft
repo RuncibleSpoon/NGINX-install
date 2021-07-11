@@ -33,7 +33,7 @@ Resources:
   nginxInstance:
     Type: "AWS::EC2::Instance"
     Properties:
-      ImageId: !FindInMap [ RegionMap, !Ref "AWS::Region", nginx ]
+      ImageId: !FindInMap [ RegionMap, !Ref "AWS::Region", ubuntu ]
       InstanceType: !Ref InstanceType
       AvailabilityZone: !Select [ 0, !GetAZs '' ]
       KeyName: !Ref KeyName
