@@ -26,7 +26,7 @@ This is an example script that
 2. An existing VPC in a supported region with internet gateway and routing configured
 3. An AWS key pair for SSH access to the instance
 4. An AWS Secret and Key for api access attached to a role with permissions to create
-    1. cloudformation templates 
+    1. CloudFormation templates 
    2. ec2 instances
     3. S3 storage buckets 
     
