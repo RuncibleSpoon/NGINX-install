@@ -46,7 +46,7 @@ Resources:
         - !Ref WebSecurityGroup
         - !Ref SSHSecurityGroup
       SubnetId: !Ref SubnetID
-      UserData:
+       :
         Fn::Base64: !Sub |
           #!/bin/bash -xe
           apt-get update
@@ -55,6 +55,7 @@ Resources:
           apt-get install -y wget
           wget https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-py3-latest.tar.gz
           python3 -m easy_install --script-dir /opt/aws/bin aws-cfn-bootstrap-py3-latest.tar.gz
+          ln -s /opt/aws/bin/cfn-hup /etc/init.d/cfn-hup
     Metadata:
       AWS::CloudFormation::Init:
         nginx:
