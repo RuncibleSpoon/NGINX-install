@@ -58,10 +58,13 @@ Resources:
           apt-get install -y python-setuptools
           mkdir -p /opt/aws/bin
           apt-get install -y wget
-          wget https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-py3-latest.tar.gz
-          python3 -m easy_install --script-dir /opt/aws/bin aws-cfn-bootstrap-py3-latest.tar.gz
-          ln -s /opt/aws/bin/cfn-hup /etc/init.d/cfn-hup
-          /opt/aws/bin/cfn-init -v -s ${AWS::StackName} -r nginxInstance --region ${AWS::Region}
+          apt-get -y install python-pip
+          pip install https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz
+          cp /usr/local/init/ubuntu/cfn-hup /etc/init.d/cfn-hup
+          chmod +x /etc/init.d/cfn-hup
+          update-rc.d cfn-hup defaults
+          service cfn-hup start
+          /usr/local/bin/cfn-init -v -s ${AWS::StackName} -r nginxInstance --region ${AWS::Region}
 
 
     Metadata:
