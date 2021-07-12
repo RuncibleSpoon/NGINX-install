@@ -49,7 +49,7 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash -ex
-           yum install -y epel-release
+           amazon-linux-extras install epel
            yum update -y aws-cfn-bootstrap
            /opt/aws/bin/cfn-init -v -s ${AWS::StackName} -r nginxInstance --region ${AWS::Region}
 
