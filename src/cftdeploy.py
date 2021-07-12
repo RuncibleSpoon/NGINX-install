@@ -23,10 +23,13 @@ stackname = "NGINXStack" + sessionId
 
 def main(vpcid,region,name,keypair):
    # ami=image[region]
+    print('Starting Deployment' )
+    print('####################')
+    print('Supplied arguments')
     print("vpc:", vpcid, " Region: ", region, " name: ", name, " keypair: ", keypair)
-    print(sessionId)
+    print('Generated unique id: ', sessionId)
     s3BucketName = 's3b' + sessionId
-    print(s3BucketName)
+    #print(s3BucketName)
 
     my_config = Config(
         region_name = region,
@@ -62,7 +65,7 @@ def main(vpcid,region,name,keypair):
     try:
        keyPair = ec2Res.KeyPair(keypair)
        keyPair.load()
-       print("Keypair id is ", keyPair.key_pair_id)
+       #print("Keypair id is ", keyPair.key_pair_id)
     except Exception as e:
       print("Keypair not found: ", e)
       sys.exit(1)
@@ -72,9 +75,9 @@ def main(vpcid,region,name,keypair):
           Filters=[{"Name": "vpc-id", "Values": [vpcid]}]
       )
       subnet_ids = [sn.id for sn in subnets]
-      print(subnet_ids)
+      #print(subnet_ids)
       subnetid=subnet_ids[0]
-      print('Subnet ' , subnetid , ' selected' )
+      #print('Subnet ' , subnetid , ' selected' )
       #availabilityZone = ec2Res.subnets()
     except Exception as e:
       print("Subnets in VPC ",vpcid, " not found: " , e)
@@ -158,7 +161,7 @@ def main(vpcid,region,name,keypair):
            }
         ]
       )
-      print(response)
+     # print(response)
     except Exception as e:
       print("could not create stack ", e)
       deleteBucket(s3BucketName)
