@@ -60,10 +60,9 @@ Resources:
           packages:
             yum:
               nginx: []
-
           commands:
             03_Start_NGINX:
-              command: "service nginx restart
+              command: "service nginx restart"
 
   WebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
