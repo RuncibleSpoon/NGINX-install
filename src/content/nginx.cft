@@ -44,7 +44,7 @@ Resources:
       KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref WebSecurityGroup
-          !Ref SSHSecurityGroup
+        - !Ref SSHSecurityGroup
       SubnetId: !Ref SubnetID
       UserData:
         Fn::Base64: !Sub |
