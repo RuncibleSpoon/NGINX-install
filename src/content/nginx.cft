@@ -44,7 +44,7 @@ Resources:
       KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref WebSecurityGroup
-        - !Ref SSHSecurityGroup
+          !Ref SSHSecurityGroup
       SubnetId: !Ref SubnetID
       UserData:
         Fn::Base64: !Sub |
@@ -84,7 +84,7 @@ Resources:
   SSHSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      VpcId: !Ref VPC
+      VpcId: !Ref VpcID
       GroupDescription: Enable SSH access via port 22
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
