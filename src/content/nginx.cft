@@ -52,6 +52,7 @@ Resources:
            amazon-linux-extras install epel
            yum update -y aws-cfn-bootstrap
            /opt/aws/bin/cfn-init -v -s ${AWS::StackName} -r nginxInstance --region ${AWS::Region}
+          /opt/aws/bin/cfn-signal -e $? -s ${AWS::StackName} -r nginxInstance --region ${AWS::Region}
 
 
     Metadata:
@@ -68,6 +69,10 @@ Resources:
 
             03_Start_NGINX:
               command: "service nginx restart"
+
+      CreationPolicy:
+        ResourceSignal:
+          Timeout: PT5
 
   WebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
