@@ -70,18 +70,6 @@ Resources:
           packages:
             apt:
               - "nginx-core"
-          files:
-            '/tmp/test':
-              content: !Sub |
-                test
-          commands:
-            01-restartNginx:
-              command: service nginx restart
-            02-test:
-              command: "echo \"$CFNTEST\" > test.txt"
-              env:
-                CFNTEST: "I come from testconfig"
-              cwd: "~"
 
 
   WebSecurityGroup:
