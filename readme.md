@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is an example script that 
+This is an example script that: 
 
 * Checks your input values - including if the VPC and keypair exist, and that you have selected a supported region
 * Builds an Amazon Linux ec2 instance in an existing VPC
