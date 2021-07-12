@@ -65,7 +65,8 @@ Resources:
 
 
     Metadata:
-       config:
+      AWS::CloudFormation::Init:
+        config:
           packages:
             apt:
               - "nginx-core"
