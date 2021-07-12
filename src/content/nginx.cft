@@ -52,22 +52,22 @@ Resources:
           apt install -y aws-cfn-bootstrap cloud-init aws-cli
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region} --configsets ec2_setup
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region}
-      Metadata:
-        AWS::CloudFormation::Init:
-          nginx:
-            packages:
-              apt:
-                - "nginx-core"
-            files:
-              '/tmp/test':
-                content: !Sub |
-                  test
-            commands:
-              01-restartNginx:
-                command: service nginx restart
-          configSets:
-            setup:
-             - "nginx"
+    Metadata:
+      AWS::CloudFormation::Init:
+        nginx:
+          packages:
+            apt:
+              - "nginx-core"
+          files:
+            '/tmp/test':
+              content: !Sub |
+                test
+          commands:
+            01-restartNginx:
+              command: service nginx restart
+        configSets:
+          setup:
+           - "nginx"
 
   WebSecurityGroup:
     Type: AWS::EC2::SecurityGroup
