@@ -44,6 +44,7 @@ Resources:
       KeyName: !Ref KeyName
       SecurityGroupIds:
         - !Ref WebSecurityGroup
+        - !Ref SSHSecurityGroup
       SubnetId: !Ref SubnetID
       UserData:
         Fn::Base64: !Sub |
@@ -79,6 +80,17 @@ Resources:
           FromPort: 80
           IpProtocol: tcp
           ToPort: 80
+
+  SSHSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VPC
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
 
 Outputs:
   PubIP:
