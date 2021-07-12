@@ -58,7 +58,6 @@ Resources:
           ln -s /opt/aws/bin/cfn-hup /etc/init.d/cfn-hup
 
     Metadata:
-      AWS::CloudFormation::Init:
         nginx:
           packages:
             apt:
@@ -70,6 +69,11 @@ Resources:
           commands:
             01-restartNginx:
               command: service nginx restart
+            02-test:
+              command: "echo \"$CFNTEST\" > test.txt"
+              env:
+                CFNTEST: "I come from testconfig"
+              cwd: "~"
         configSets:
           setup:
            - "nginx"
