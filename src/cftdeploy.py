@@ -191,7 +191,7 @@ def main(vpcid,region,name,keypair):
 
 
   ### Delete the S3 Bucket
-    deleteBucket(s3BucketName)
+  #    deleteBucket(s3BucketName)
 
 ### Function to empty and delete the bucket
 
