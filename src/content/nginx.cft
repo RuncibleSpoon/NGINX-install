@@ -61,6 +61,8 @@ Resources:
             yum:
               nginx: []
           commands:
+            01_test:
+              command: "touch /var/tmp/foo"
             03_Start_NGINX:
               command: "service nginx restart"
 
