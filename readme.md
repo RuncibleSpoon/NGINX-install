@@ -54,7 +54,7 @@ pip install -r requirements.txt
 4. If not already installed and configured, [install](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install)
 the AWS CLI tool and run ```aws configure```, providing your AWS key and secret
    
-5. If you want to edit the test page displayed, edit contents/index.html 
+5. If you want to edit the test page displayed, edit ```contents/index.html``` 
 
 ## Script Operation 
 
