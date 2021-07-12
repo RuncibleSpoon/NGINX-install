@@ -49,6 +49,11 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash -xe
+          export PATH="${!PATH}:/opt/aws/bin"
+          STACK_NAME="${AWS::StackName}"
+          REGION="${AWS::Region}"
+          RESOURCE="nginxInstance"
+          CONFIG_SETS="setup"
           apt-get update
           apt-get install -y python-setuptools
           mkdir -p /opt/aws/bin
@@ -56,6 +61,9 @@ Resources:
           wget https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-py3-latest.tar.gz
           python3 -m easy_install --script-dir /opt/aws/bin aws-cfn-bootstrap-py3-latest.tar.gz
           ln -s /opt/aws/bin/cfn-hup /etc/init.d/cfn-hup
+          cfn-init --verbose --stack "$STACK_NAME" --region "$REGION" \
+                 --resource "$RESOURCE" --configsets "$CONFIG_SETS"
+
 
     Metadata:
         nginx:
