@@ -1,0 +1,38 @@
+# A Simple Python-Based Wrapper to Create an  NGINX Webserver via AWS Cloudformation 
+
+##Introduction
+
+This is an example script that 
+
+* Checks your input values - including if the VPC and keypair exist, and that you have selected a supported region
+* Builds an Amazon Linux ec2 instance in an existing VPC
+* Installs NGINX OSS
+* Installs content from this repo 
+* Starts NGINX
+* Outputs the public IP address of the instance
+
+##Prerequisites 
+
+###System
+
+1. Python 3.6 or above (tested on 3.6.9)
+2. Pip
+3. venv (not explicitly necessary, but recommended)
+4. The AWS cli utility 
+
+###AWS Environment
+
+1. Supported regions  us-west-2 and us-east-2
+2. An existing VPC in a supported region with internet gateway and routing configured
+3. An AWS key pair for SSH access to the instance
+4. An AWS Secret and Key for api access attached to a role with permissions to create
+    1. cloudformation templates 
+   2. ec2 instances
+    3. S3 storage buckets 
+    
+## Installation 
+
+
+
+
+
