@@ -49,10 +49,12 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash -xe
-          apt update -y
-          apt install -y aws-cfn-bootstrap cloud-init aws-cli
-          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region} --configsets ec2_setup
-          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region}
+          apt-get update
+          apt-get install -y python-setuptools
+          mkdir -p /opt/aws/bin
+          apt-get install -y wget
+          wget https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-py3-latest.tar.gz
+          python3 -m easy_install --script-dir /opt/aws/bin aws-cfn-bootstrap-py3-latest.tar.gz
     Metadata:
       AWS::CloudFormation::Init:
         nginx:
