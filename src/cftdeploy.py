@@ -89,10 +89,10 @@ def main(vpcid,region,name,keypair):
         s3res = boto3.resource("s3")
         # retrieve bucket object - could this be more elegant?
         bucket = s3res.Bucket(s3BucketName)
-        contentUrl = "https://s3.amazonaws.com/" + s3BucketName + "/index.html"
-        configUrl = "https://s3.amazonaws.com/" + s3BucketName + "/nginx.conf"
+        contentUrl = "https://" + s3BucketName + ".s3." + region + ".amazonaws.com/index.html"
+        configUrl = "https://" + s3BucketName + ".s3." + region + ".amazonaws.com/nginx.conf"
         templateUrl = "https://s3.amazonaws.com/" + s3BucketName + "/nginx.cft"
-        print(templateUrl)
+        print(templateUrl, "  ", contentUrl)
         print('S3bucket Created')
 
 
