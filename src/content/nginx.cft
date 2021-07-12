@@ -64,7 +64,7 @@ Resources:
             01_content:
               command: "curl $CONTENT > /usr/share/www/index.html"
               env:
-                CONTENT: !ref contentUrl
+                CONTENT: !Ref contentUrl
 
             03_Start_NGINX:
               command: "service nginx restart"
