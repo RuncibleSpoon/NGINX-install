@@ -57,10 +57,51 @@ the AWS CLI tool and run ```aws configure```, providing your AWS key and secret
 
 ## Script Operation 
 
+The script takes parameters and the files in the ```content``` directory and:
+
+1. Verifies objects like region, VPC id, and keypair are correct  
+2. Creates an S3 bucket and uploads a simple html file and CloudFormation template 
+3. Builds a stack based on the CloudFormation template and user supplied parameters
+4. Waits for the stack creation and NGINX software install to complete   
+4. Empties and deletes the created S3 bucket
+
+
+
+
 ### Parameters
 
 The script takes the following parameters:
 
+```shell
+
+usage: cftdeploy.py [-h] [--vpcid VPCID] [--region {us-east-2,us-west-2}]
+                    [--name NAME] [--keypair KEYPAIR]
+
+optional arguments:
+  -h, --help                             show this help message and exit
+  --vpcid VPCID                          Your AWS VPC - must exist.
+  --region {us-east-2,us-west-2}         AWS Region to deploy to - choose us-east-2 or us- west-2.
+  --name NAME                            New instance name.
+  --keypair KEYPAIR                      AWS keypair name to use.
+
+```
+### Running the Script 
+
+Example:
+
+``` cftdeploy.py --name foo --vpcid vpc-47f9762c --keypair nginxkp --region us-east-2 ```
+
+The The script outputs the public IP address of the created ec2 instance. If your VPC and networking is so configured, 
+you will be able to go that page in a browser.
+
+
+
+### To Do
+
+* Propper logging using the Python logging module
+* Replace the index.html install with a zip/unzip of a file archive
+* Add functionality to replace the nginx.conf file 
+* Additional region support
 
 
 
