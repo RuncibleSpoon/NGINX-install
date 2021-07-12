@@ -62,7 +62,7 @@ Resources:
               nginx: []
           commands:
             01_content:
-              command: "curl $CONTENT > /usr/share/www/index.html"
+              command: "curl $CONTENT >  /usr/share/nginx/html/index.html"
               env:
                 CONTENT: !Ref contentUrl
 
