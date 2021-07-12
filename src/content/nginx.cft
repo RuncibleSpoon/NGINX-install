@@ -59,7 +59,7 @@ Resources:
         config:
           packages:
             yum:
-              - "nginx"
+              nginx: []
 
 
   WebSecurityGroup:
