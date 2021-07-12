@@ -18,7 +18,7 @@ This is an example script that
 1. Python 3.6 or above (tested on 3.6.9)
 2. Pip
 3. venv (not explicitly necessary, but recommended)
-4. The AWS cli utility 
+4. The [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install) utility 
 
 ###AWS Environment
 
@@ -31,6 +31,47 @@ This is an example script that
     3. S3 storage buckets 
     
 ## Installation 
+
+1. Clone the repo
+
+```shell
+git clone https://github.com/RuncibleSpoon/NGINX-install 
+```
+
+2. Create a virtual environment to mange your python dependencies. See [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) 
+for more information on Python venv
+```shell
+python3 -m venv env
+source env/bin/activate
+```
+3. Use pip to install the required packages
+```shell
+cd src
+pip install -r requirements.txt
+```
+
+4. If not already installed and configured, [install](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install)
+the AWS CLI tool and run ```aws configure```, providing your AWS key and secret
+   
+5. If you want to edit the test page displayed, edit contents/index.html 
+
+## Script Operation 
+
+### Parameters
+
+The script takes the following parameters:
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

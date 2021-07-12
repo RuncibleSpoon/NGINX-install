@@ -212,89 +212,13 @@ def  deleteBucket(s3BucketName):
 
 
 
-#     SecurityGroup=setup_security_group(security_group_name, security_group_description, ec2, ec2Res)
-#
-#     try:
-#       instances = ec2.run_instances(
-#               ImageId=ami,
-#               MinCount=1,
-#               MaxCount=1,
-#               InstanceType="t4g.nano",
-#               KeyName=keyPair.name
-#       )
-#     except Exception as e:
-#
-#    # quick check to see what is there
-#
-#     response = ec2.describe_instances(
-#       Filters=[
-#         {
-#          'Name': 'vpc-id',
-#          'Values': [vpcid]
-#         }
-#       ]
-#     )
-#     #print(response)
-#
-#
-#     print(SecurityGroup)
-
-# ### Stole this bit from
-# ### https://docs.aws.amazon.com/code-samples/latest/catalog/python-ec2-ec2_basics-ec2_setup.py.html
-#
-# def setup_security_group(group_name, group_description, ec2, ec2Res):
-#     """
-#     Creates a security group in the default virtual private cloud (VPC) of the
-#     current account, then adds rules to the security group to allow access to
-#     HTTP, HTTPS and, optionally, SSH.
-#
-#     :param group_name: The name of the security group to create.
-#     :param group_description: The description of the security group to create.
-#     :param ssh_ingress_ip: The IP address that is granted inbound access to connect
-#                            to port 22 over TCP, used for SSH.
-#     :return: The newly created security group.
-#     """
-#     ## removed the code to find the default VPC since I want it specified
-#
-#     try:
-#         security_group = ec2.create_security_group(
-#             GroupName=group_name, Description=group_description)
-#         sgID=security_group['GroupId']
-# #         logger.info(
-#         #print("Created security group ", security_group, "group id: ", sgID)
-#     except  Exception as e:
-# #         logger.exception("Couldn't create security group %s.", group_name)
-#           raise
-#
-#     try:
-#         ip_permissions = [{
-#             # HTTP ingress open to anyone
-#             'IpProtocol': 'tcp', 'FromPort': 80, 'ToPort': 80,
-#             'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
-#         }, {
-#             # HTTPS ingress open to anyone
-#             'IpProtocol': 'tcp', 'FromPort': 443, 'ToPort': 443,
-#             'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
-#         }]
-#         ## removed ssh - not cool
-#         print("secuirty group id: ", sgID)
-#         sec_group=ec2Res.SecurityGroup(sgID)
-#         print("foo: " ,sec_group.group_id)
-#         sec_group.authorize_ingress(IpPermissions=ip_permissions)
-#         #print("Set inbound rules for %s to allow all inbound HTTP and HTTPS ")
-#
-#     except Exception as e:
-#         print("Couldnt authorize inbound rules for %s.", group_name, "  :", e)
-#
-#     else:
-#         return security_group
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('vpcid', help='Your AWS VPC - must exist')
+    parser.add_argument(
+         '--vpcid', help='Your AWS VPC - must exist')
     parser.add_argument(
         '--region',
         default='us-east-2',
