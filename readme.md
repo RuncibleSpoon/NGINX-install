@@ -1,6 +1,6 @@
 # A Simple Python-Based Wrapper to Create an  NGINX Webserver via AWS Cloudformation 
 
-##Introduction
+## Introduction
 
 This is an example script that 
 
@@ -11,16 +11,16 @@ This is an example script that
 * Starts NGINX
 * Outputs the public IP address of the instance
 
-##Prerequisites 
+## Prerequisites 
 
-###System
+### System
 
 1. Python 3.6 or above (tested on 3.6.9)
 2. Pip
 3. venv (not explicitly necessary, but recommended)
 4. The [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install) utility 
 
-###AWS Environment
+### AWS Environment
 
 1. Supported regions  us-west-2 and us-east-2
 2. An existing VPC in a supported region with internet gateway and routing configured
