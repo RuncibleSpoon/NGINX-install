@@ -13,17 +13,17 @@ This is an example script that:
 
 ## Prerequisites 
 
-### System
+### System Requirements
 
 1. Python 3.6 or above (tested on 3.6.9)
 2. Pip
 3. venv (not explicitly necessary, but recommended)
 4. The [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install) utility 
 
-### AWS Environment
+### AWS Environment Requirements
 
-1. Supported regions  us-west-2 and us-east-2
-2. An existing VPC in a supported region with internet gateway and routing configured
+1. Supported regions:  us-west-2 and us-east-2
+2. An existing VPC in a supported region with internet gateway and routing etc. configured
 3. An AWS key pair for SSH access to the instance
 4. An AWS Secret and Key for api access attached to a role with permissions to create
     1. CloudFormation templates 
@@ -41,6 +41,7 @@ git clone https://github.com/RuncibleSpoon/NGINX-install
 2. Create a virtual environment to mange your python dependencies. See [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) 
 for more information on Python venv
 ```shell
+cd NGINX-install
 python3 -m venv env
 source env/bin/activate
 ```
