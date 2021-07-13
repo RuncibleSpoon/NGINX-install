@@ -1,4 +1,4 @@
-# A Simple Python-Based Wrapper to Create an  NGINX Webserver via AWS Cloudformation 
+# A Simple Python-Based Wrapper to Create an  NGINX Webserver via AWS CloudFormation 
 
 ## Introduction
 
@@ -92,7 +92,7 @@ Example:
 
 ``` cftdeploy.py --name foo --vpcid vpc-47f9762c --keypair nginxkp --region us-east-2 ```
 
-The The script outputs the public IP address of the created ec2 instance. If your VPC and networking is so configured, 
+The script outputs the public IP address of the created ec2 instance. If your VPC and networking is so configured, 
 you will be able to go that page in a browser.
 
 
