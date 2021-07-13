@@ -1,5 +1,11 @@
-#Python for creating an ec2 instance and installing NGINX
-#
+"""Simple Python Wrapper for CFT using Boto3.
+
+Validates arguments against existing infrastructure
+Creates S3 for cft and content
+Passes parameters to cft
+
+"""
+
 import boto3
 import argparse
 import os
@@ -8,16 +14,18 @@ import sys
 import uuid
 from botocore.config import Config
 
+__author__ = "Robert Haynes"
+__copyright__ = "Copyright 2021, Robert Haynes"
 
-# AWS image to use
-# this could be replaced with AWS systems manager
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Robert Haynes"
+__email__ = "robert.haynes@gmail.com"
+__status__ = "Demonstration only"
 
-#image = {'us-west-2': 'ami-01773ce53581acf22', 'us-east-2': 'ami-0b29b6e62f2343b46' }
 
-# other default things that could be changed
+### Create a unique session ID
 
-security_group_name = "WebServer2"
-security_group_description = "Inbound 443 and 80"
 sessionId = str(uuid.uuid1().int)
 stackname = "NGINXStack" + sessionId
 
@@ -43,7 +51,7 @@ def main(vpcid,region,name,keypair):
 
 
 
-  # basic setup check
+  ### basic setup check
 
     try:
       ec2 = boto3.client('ec2',config=my_config)
@@ -70,6 +78,9 @@ def main(vpcid,region,name,keypair):
       print("Keypair not found: ", e)
       sys.exit(1)
 
+    ### Select a subnet
+    ### This could interactively present a list of the available subnets in future
+
     try:
       subnets = ec2Res.subnets.filter(
           Filters=[{"Name": "vpc-id", "Values": [vpcid]}]
@@ -79,6 +90,7 @@ def main(vpcid,region,name,keypair):
       subnetid=subnet_ids[0]
       #print('Subnet ' , subnetid , ' selected' )
       #availabilityZone = ec2Res.subnets()
+
     except Exception as e:
       print("Subnets in VPC ",vpcid, " not found: " , e)
       sys.exit(1)
@@ -95,11 +107,8 @@ def main(vpcid,region,name,keypair):
         contentUrl = "https://" + s3BucketName + ".s3." + region + ".amazonaws.com/index.html"
         configUrl = "https://" + s3BucketName + ".s3." + region + ".amazonaws.com/nginx.conf"
         templateUrl = "https://s3.amazonaws.com/" + s3BucketName + "/nginx.cft"
-        print(templateUrl, "  ", contentUrl)
+        #print(templateUrl, "  ", contentUrl)
         print('S3bucket Created')
-
-
-
 
     except Exception as e:
                  print("Bucket not created: ", e)
@@ -111,12 +120,13 @@ def main(vpcid,region,name,keypair):
     print('Building upload file list')
     arr=os.listdir('./content')
     #print(arr, "\n")
+
     # use the file list to upload to the s3 bucket
-    # use the bucket resource object not the client conneciton
+    # use the bucket resource object not the client connection
     try:
         for file_name in arr:
           print('uploading ',file_name)
-          # should really paramerize the path
+          # should really parameterize the path
           file_path = './content/' + file_name
           bucket.upload_file(
             Filename=file_path,
@@ -193,7 +203,8 @@ def main(vpcid,region,name,keypair):
       print('stack status failed with ', stack.stack_status)
 
 
-  ### Delete the S3 Bucket
+### Finished, so delete the S3 Bucket
+
       deleteBucket(s3BucketName)
 
 ### Function to empty and delete the bucket
