@@ -103,7 +103,7 @@ you will be able to go that page in a browser.
 * Replace the index.html install with a zip/unzip of a file archive
 * Add functionality to replace the nginx.conf file 
 * Additional region support
-
+* Functionality to query subnets in the VPC, filter on type and allow user selection (and/or pass in as an argument)
 
 
 
